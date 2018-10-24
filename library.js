@@ -103,7 +103,7 @@ var addTrack = function (name, artist, album) {
 // adds a playlist to the library
 
 var addPlaylist = function (name) {
-  var newPlaylist = { id: "",
+  var newPlaylist = { id: uid(),
   name: name,
   tracks: [""] };
 
@@ -111,7 +111,7 @@ var addPlaylist = function (name) {
   console.log(library.playlists);
 }
 
-// addPlaylist("Eriks bumpin tunes!");
+addPlaylist("Eriks bumpin tunes!");
 
 // STRETCH:
 // given a query string string, prints a list of tracks
@@ -120,5 +120,5 @@ var addPlaylist = function (name) {
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/search
 
 var printSearchResults = function(query) {
-
+  // 
 }
