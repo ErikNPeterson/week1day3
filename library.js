@@ -39,17 +39,18 @@ var printPlaylists = function () {
   }
 }
 
-
-
 // prints a list of all tracks, in the form:
 // t01: Code Monkey by Jonathan Coulton (Thing a Week Three)
 // t02: Model View Controller by James Dempsey (WWDC 2003)
 // t03: Four Thirty-Three by John Cage (Woodstock 1952)
 
 var printTracks = function () {
-
+  var accessTracks = library.tracks;
+  for(let i in accessTracks){
+    var currentTrack = accessTracks[i];
+    console.log(currentTrack.id + ": " + currentTrack.name + " by " + currentTrack.artist + " (" + currentTrack.album + ").");
+  }
 }
-
 
 // prints a list of tracks for a given playlist, in the form:
 // p01: Coding Music - 2 tracks
@@ -57,16 +58,27 @@ var printTracks = function () {
 // t02: Model View Controller by James Dempsey (WWDC 2003)
 
 var printPlaylist = function (playlistId) {
-
+  var pathToPlaylist = library.playlists[playlistId];
+  console.log(pathToPlaylist.id + ": " + pathToPlaylist.name + " contains "+ pathToPlaylist.tracks.length + " tracks.");
+    var tracksArray = pathToPlaylist.tracks;
+    tracksArray.forEach(item => {
+      var pathToTracks = library.tracks[item];
+      console.log(pathToTracks.id + ": " + pathToTracks.name + " by " + pathToTracks.artist + " (" + pathToTracks.album + ").");
+    });
 }
+
+// printPlaylist('p01');
+// printPlaylist('p02');
 
 
 // adds an existing track to an existing playlist
 
 var addTrackToPlaylist = function (trackId, playlistId) {
-
+  library.playlists[playlistId].tracks.push(trackId);
+  console.log(library.playlists[playlistId]);
 }
 
+// addTrackToPlaylist('t01', 'p02');
 
 // generates a unique id
 // (use this for addTrack and addPlaylist)
@@ -79,16 +91,27 @@ var uid = function() {
 // adds a track to the library
 
 var addTrack = function (name, artist, album) {
-
+  var inputNewTrack = { id: uid(), 
+  name: name, 
+  artist: artist,
+   album: album };
+  library.tracks[inputNewTrack.id] = inputNewTrack;
+  console.log(library.tracks);
 }
-
+// addTrack("Erik IS THE CHAMPION", "Erik", "Erik is Full Of Himself");
 
 // adds a playlist to the library
 
 var addPlaylist = function (name) {
+  var newPlaylist = { id: "",
+  name: name,
+  tracks: [""] };
 
+  library.playlists[newPlaylist.id] = newPlaylist;
+  console.log(library.playlists);
 }
 
+// addPlaylist("Eriks bumpin tunes!");
 
 // STRETCH:
 // given a query string string, prints a list of tracks
